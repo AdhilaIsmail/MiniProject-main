@@ -45,19 +45,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="#" class="nav-item nav-link active">Home</a>
-                {% if user.is_authenticated %}
+                <a href="{% url 'hospitalhome' %}" class="nav-item nav-link">Home</a>
+                {% comment %} {% if user.is_authenticated %} {% endcomment %}
                 <a href="{% url 'bloodavailability' %}" class="nav-item nav-link">Blood Availability</a>
-                <a href="{% url 'requestblood' %}" class="nav-item nav-link">Blood Request</a>
+                <a href="{% url 'requestblood' %}" class="nav-item nav-link active">Blood Request</a>
                
-                {% endif %}
+                {% comment %} {% endif %} {% endcomment %}
                 <a href="{% url 'hospitalabout' %}" class="nav-item nav-link">About Us</a>
                 <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
                 {% if user.is_authenticated %}
                 <a class="nav-item nav-link" href="{% url 'loggout' %}">Logout</a>
                 <a href="#" class="nav-item nav-link">{{user.email}}</a>
                 {% else %}
-                <a class="nav-item nav-link" href="{% url 'loginn' %}">Login</a>
+                <a class="nav-item nav-link" href="{% url 'hospitallogin' %}">Login</a>
                 {% endif %}
             </div>
         </div>
@@ -82,40 +82,44 @@
     </div>
     <!-- Full Screen Search End -->
 
-    <!-- Carousel Start -->
     <div class="container-fluid p-0">
         <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="{% static 'img/hsptlbg.jpg' %} " alt="Image">
+                    <img class="w-100" src="{% static 'img/bg16.jpg' %}" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
-                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">"Empowering Hospitals Through Digital Blood Bank Management: Efficient, Lifesaving, and Connected"</h5>
-                            <h4 class="display-1 text-white mb-md-4 animated zoomIn">Seamless Blood Requests, Swift Responses – Enhancing Hospital Care</h4>
-                            {% if user.role == user.HOSPITAL %}
-                                <a href="{% url 'requestblood' %}" class="btn btn-danger py-md-3 px-md-5 me-3 animated slideInLeft">Request Blood</a>
-                            {% endif %}
+                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">Revolutionizing Healthcare</h5>
+                            <!-- <h4 class="display-1 text-white mb-md-4 animated zoomIn">Unifying Blood Bank and Laboratory Services for Enhanced Patient Care</h4> -->
+                            <form  method="post"  action="" class="animated slideInUp" id="bloodrequestform">
+                                {% csrf_token %}
+                               
+                                <div class="mb-3">
+                                    <input type="email" class="form-control" name="email" placeholder="Email Address" value="{{ user.email }}" required>
+                                    <div class="error" data-error-for="email">
+                                </div>
+                                </div>
+                                      <div class="mb-3">
+                                    <input type="text" class="form-control" name="blood_group" placeholder="Blood Group" required>
+                                    <div class="error" data-error-for="blood_group"></div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <textarea class="form-control" name="purpose" placeholder="Purpose for Requesting Blood" rows="4" required></textarea>
+                                    <div class="error" data-error-for="purpose"></div>
+                                </div>
+                                {% if user.role == user.HOSPITAL %}
+                                    <a href="{% url 'requestblood' %}" class="btn btn-danger py-md-3 px-md-5 me-3 animated slideInLeft">Request Blood</a>
+                                {% endif %}
+                            </form>
                         </div>
                     </div>
-                    
-                </div>
-                
+                </div>  
             </div>
-            {% comment %} <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button> {% endcomment %}
         </div>
     </div>
-    <!-- Carousel End -->
 
-    <!-- About Start -->
+    {% comment %} <!-- About Start -->
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="row g-5">
@@ -152,7 +156,7 @@
     
     
     <!-- About End -->
-
+ {% endcomment %}
 
     <!-- Offer Start -->
     {% comment %} <div class="container-fluid bg-offer my-5 py-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -170,29 +174,7 @@
     </div> {% endcomment %}
     <!-- Offer End -->
 
-    <!-- Testimonial Start -->
-    <div class="container-fluid bg-primary bg-testimonial py-5 my-5 wow fadeInUp" data-wow-delay="0.1s">
-        <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-7">
-                    <div class="owl-carousel testimonial-carousel rounded p-5 wow zoomIn" data-wow-delay="0.6s">
-                        <div class="testimonial-item text-center text-dark">
-                            <img class="img-fluid mx-auto rounded mb-4" src="{% static 'img/testimonial-1.jpg' %}" alt="">
-                            <p class="fs-5">Dolores sed duo clita justo dolor et stet lorem kasd dolore lorem ipsum. At lorem lorem magna ut et, nonumy labore diam erat. Erat dolor rebum sit ipsum.</p>
-                            <hr class="mx-auto w-25">
-                            <h4 class="text-dark mb-0">Client Name</h4>
-                        </div>
-                        <div class="testimonial-item text-center text-dark">
-                            <img class="img-fluid mx-auto rounded mb-4" src="{% static 'img/testimonial-2.jpg' %}" alt="">
-                            <p class="fs-5">Dolores sed duo clita justo dolor et stet lorem kasd dolore lorem ipsum. At lorem lorem magna ut et, nonumy labore diam erat. Erat dolor rebum sit ipsum.</p>
-                            <hr class="mx-auto w-25">
-                            <h4 class="text-dark mb-0">Client Name</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     
     
     <!-- Footer Start -->

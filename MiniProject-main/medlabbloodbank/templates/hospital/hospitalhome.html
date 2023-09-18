@@ -46,11 +46,11 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a href="#" class="nav-item nav-link active">Home</a>
-                {% if user.is_authenticated %}
+                {% comment %} {% if user.is_authenticated %} {% endcomment %}
                 <a href="{% url 'bloodavailability' %}" class="nav-item nav-link">Blood Availability</a>
                 <a href="{% url 'requestblood' %}" class="nav-item nav-link">Blood Request</a>
                
-                {% endif %}
+                {% comment %} {% endif %} {% endcomment %}
                 <a href="{% url 'hospitalabout' %}" class="nav-item nav-link">About Us</a>
                 <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
                 {% if user.is_authenticated %}
@@ -101,16 +101,7 @@
                 </div>
                 
             </div>
-            {% comment %} <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button> {% endcomment %}
+           
         </div>
     </div>
     <!-- Carousel End -->

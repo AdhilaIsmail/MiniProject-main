@@ -465,6 +465,26 @@ def bloodinventory(request):
     return render(request, 'mainuser/bloodinventory.html', {'blood_types': blood_types})
 
 
+#hospital
+def hospitallogin(request):
+    # if request.method == "POST":
+    #     username = request.POST['email']
+    #     password = request.POST['password']
+    #     user = authenticate(username=username, password=password)
+        
+    #     if user is not None:
+    #         login(request, user)
+    #         if user.is_superuser:  # Check if the user is a superuser (admin)
+    #             return redirect('adminindex')  # Redirect to the admin dashboard
+    #         else:
+    #             return redirect('index')  # Redirect to the custom dashboard for non-admin users
+    #     else:
+    #         messages.info(request, "Invalid Login")
+    #         return redirect('hospitallogin')
+    # else:
+        return render(request, 'hospital/hospitallogin.html')
+
+
 
 
 
